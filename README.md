@@ -1,4 +1,4 @@
-android-transcoder
+forked android-transcoder to support transcoding without audio channel
 =================
 
 Hardware accelerated transcoder for Android, written in pure Java.
