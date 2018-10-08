@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.novoda:bintray-release:0.2.4'
+        classpath 'com.novoda:bintray-release:0.8.0'
     }
 }
 
@@ -11,12 +11,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'bintray-release'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '28.0.2'
 
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 24
+        targetSdkVersion 27
     }
 
     buildTypes {
@@ -29,12 +29,21 @@ android {
     }
 }
 
-publish {
-    groupId = 'net.ypresto.androidtranscoder'
-    artifactId = 'android-transcoder'
-    version = '0.3.0'
-    licences = ['Apache-2.0']
-    website = 'https://github.com/ypresto/android-transcoder'
-    autoPublish = false
-    dryRun = false
+allprojects {
+    apply plugin: 'maven'
+    group = 'com.adidas.video'
+    version = '0.3'
+
+    uploadArchives {
+        repositories.mavenDeployer {
+            pom.artifactId = 'android-transcoder'
+            pom.version='0.5.1'
+            pom.packaging='aar'
+            repository(url: "http://micoach.artifactoryonline.com/micoach/mobility-snapshots") {
+                authentication(userName: "mobilityci", password: "4_AdiDaS_2012_2")
+            }
+            uniqueVersion = true
+        }
+    }
 }
+
